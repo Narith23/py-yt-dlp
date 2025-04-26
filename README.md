@@ -18,7 +18,7 @@ This is a simple Python script to download YouTube videos using the powerful [yt
 ### 1. Clone the repository or download the script
 
 ```bash
-git clone https://github.com/your-username/yt-downloader.git
+git clone https://github.com/Narith23/py-yt-dlp.git
 cd yt-downloader
 ```
 
