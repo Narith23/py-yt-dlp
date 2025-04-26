@@ -1,0 +1,50 @@
+import os
+import yt_dlp
+
+def download_youtube_video(url, path='videos'):
+    """
+    Download a YouTube video to the specified folder.
+    """
+    try:
+        # Ensure the download directory exists
+        os.makedirs(path, exist_ok=True)
+
+        # yt-dlp options
+        ydl_opts = {
+            'format': 'best[ext=mp4]',
+            'outtmpl': os.path.join(path, '%(title)s.%(ext)s'),
+        }
+
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+            print(f"\n🎬 Title: {info['title']}")
+            print("✅ Download complete.\n")
+    except Exception as e:
+        print(f"❌ Error downloading video: {e}\n")
+
+def main():
+    """
+    Main loop for user input.
+    """
+    print("🎥 YouTube Video Downloader\nType 'exit' to quit.\n")
+    try:
+        while True:
+            url = input("Enter the YouTube video URL: ").strip()
+            if url.lower() == 'exit':
+                print("\n👋 Exiting... Goodbye!")
+                break
+            if not url.startswith("http"):
+                print("❗ Please enter a valid YouTube URL.\n")
+                continue
+
+            download_youtube_video(url)
+
+            choice = input("Download another video? (yes/no): ").strip().lower()
+            if choice != 'yes':
+                print("\n👋 Exiting... Goodbye!")
+                break
+    except KeyboardInterrupt:
+        print("\n👋 Exiting... Goodbye!")
+
+if __name__ == '__main__':
+    main()
